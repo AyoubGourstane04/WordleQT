@@ -179,6 +179,7 @@ Widget::Widget(const QString &username, QWidget *parent)
     targetWord = temp;
 
 
+
     for (int row = 0; row < 6; ++row) {
         for (int col = 0; col < 5; ++col) {
             letterBoxes[row][col]->installEventFilter(
@@ -186,6 +187,7 @@ Widget::Widget(const QString &username, QWidget *parent)
                     submitButton->click();
                 }, letterBoxes[row][col])
                 );
+             letterBoxes[row][col]->installEventFilter(new ArrowKeyFilter(letterBoxes, currentIndex, col, letterBoxes[row][col]));
 
             if(row == 0 && col == 0) letterBoxes[row][col]->setFocus();
 
@@ -450,6 +452,7 @@ void Widget::checkGuess(QString target,int &score, const QString currentUsername
         QMessageBox::information(this, "Congratulations!", str);
 
         resetGame();
+
     }else if(++currentIndex>=6){
         QString str = "<div style='text-align: center; font-family: Futura, sans-serif;'>"
                       "<h2 style='color: #fff; font-size: 20px;'>The word was</h2>"

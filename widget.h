@@ -73,7 +73,7 @@ private:
 
 };
 
-//submit on pressing enter
+//submit on pressing enter:
 class EnterKeyFilter : public QObject {
     Q_OBJECT
 public:
@@ -95,6 +95,50 @@ protected:
 private:
     std::function<void()> submitCallback;
 };
+
+
+//key buttons handling :
+
+class ArrowKeyFilter : public QObject {
+    Q_OBJECT
+public:
+    ArrowKeyFilter(QLineEdit* (&letterBoxes)[6][5], int& currentRow, int& currentCol, QObject* parent = nullptr)
+        : QObject(parent), letterBoxes(letterBoxes), currentRow(currentRow), currentCol(currentCol) {}
+
+protected:
+    bool eventFilter(QObject* obj, QEvent* event) override {
+        if (event->type() == QEvent::KeyPress) {
+            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+            switch (keyEvent->key()) {
+            case Qt::Key_Left:
+                if (currentCol > 0) currentCol--;
+                break;
+            case Qt::Key_Right:
+                if (currentCol < 4) currentCol++;
+                break;
+            case Qt::Key_Up:
+                if (currentRow > 0) currentRow--;
+                break;
+            case Qt::Key_Down:
+                if (currentRow < 5) currentRow++;
+                break;
+            default:
+                return QObject::eventFilter(obj, event);
+            }
+
+            // Move focus to the new tile
+            letterBoxes[currentRow][currentCol]->setFocus();
+            return true;
+        }
+        return QObject::eventFilter(obj, event);
+    }
+
+private:
+    QLineEdit* (&letterBoxes)[6][5];  // Correct reference type for a 2D array
+    int& currentRow;
+    int& currentCol;
+};
+
 
 
 
