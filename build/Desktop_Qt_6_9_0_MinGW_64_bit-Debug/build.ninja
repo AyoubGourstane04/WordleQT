@@ -103,6 +103,15 @@ build CMakeFiles/wordle.dir/database.cpp.obj: CXX_COMPILER__wordle_unscanned_Deb
   OBJECT_DIR = CMakeFiles\wordle.dir
   OBJECT_FILE_DIR = CMakeFiles\wordle.dir
 
+build CMakeFiles/wordle.dir/customlineedit.cpp.obj: CXX_COMPILER__wordle_unscanned_Debug C$:/ProgramData/QtCreator/Links/220b434853c64bd082ec8dbd95780879/customlineedit.cpp || cmake_object_order_depends_target_wordle
+  CONFIG = Debug
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\wordle.dir\customlineedit.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/wordle_autogen/include -isystem C:/Qt/6.9.0/mingw_64/include/QtCore -isystem C:/Qt/6.9.0/mingw_64/include -isystem C:/Qt/6.9.0/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.9.0/mingw_64/include/QtWidgets -isystem C:/Qt/6.9.0/mingw_64/include/QtGui -isystem C:/Qt/6.9.0/mingw_64/include/QtNetwork -isystem C:/Qt/6.9.0/mingw_64/include/QtSql
+  OBJECT_DIR = CMakeFiles\wordle.dir
+  OBJECT_FILE_DIR = CMakeFiles\wordle.dir
+
 build CMakeFiles/wordle.dir/wordle_autogen/EWIEGA46WW/qrc_res.cpp.obj: CXX_COMPILER__wordle_unscanned_Debug C$:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/wordle_autogen/EWIEGA46WW/qrc_res.cpp || cmake_object_order_depends_target_wordle
   CONFIG = Debug
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
@@ -120,7 +129,7 @@ build CMakeFiles/wordle.dir/wordle_autogen/EWIEGA46WW/qrc_res.cpp.obj: CXX_COMPI
 #############################################
 # Link the executable wordle.exe
 
-build wordle.exe: CXX_EXECUTABLE_LINKER__wordle_Debug CMakeFiles/wordle.dir/wordle_autogen/mocs_compilation.cpp.obj CMakeFiles/wordle.dir/main.cpp.obj CMakeFiles/wordle.dir/widget.cpp.obj CMakeFiles/wordle.dir/login.cpp.obj CMakeFiles/wordle.dir/signup.cpp.obj CMakeFiles/wordle.dir/database.cpp.obj CMakeFiles/wordle.dir/wordle_autogen/EWIEGA46WW/qrc_res.cpp.obj | C$:/Qt/6.9.0/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.9.0/mingw_64/lib/libQt6Network.a C$:/Qt/6.9.0/mingw_64/lib/libQt6Sql.a C$:/Qt/6.9.0/mingw_64/lib/libQt6Gui.a C$:/Qt/6.9.0/mingw_64/lib/libQt6Core.a C$:/Qt/6.9.0/mingw_64/lib/libQt6EntryPoint.a || wordle_autogen wordle_autogen_timestamp_deps
+build wordle.exe: CXX_EXECUTABLE_LINKER__wordle_Debug CMakeFiles/wordle.dir/wordle_autogen/mocs_compilation.cpp.obj CMakeFiles/wordle.dir/main.cpp.obj CMakeFiles/wordle.dir/widget.cpp.obj CMakeFiles/wordle.dir/login.cpp.obj CMakeFiles/wordle.dir/signup.cpp.obj CMakeFiles/wordle.dir/database.cpp.obj CMakeFiles/wordle.dir/customlineedit.cpp.obj CMakeFiles/wordle.dir/wordle_autogen/EWIEGA46WW/qrc_res.cpp.obj | C$:/Qt/6.9.0/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.9.0/mingw_64/lib/libQt6Network.a C$:/Qt/6.9.0/mingw_64/lib/libQt6Sql.a C$:/Qt/6.9.0/mingw_64/lib/libQt6Gui.a C$:/Qt/6.9.0/mingw_64/lib/libQt6Core.a C$:/Qt/6.9.0/mingw_64/lib/libQt6EntryPoint.a || wordle_autogen wordle_autogen_timestamp_deps
   CONFIG = Debug
   FLAGS = -DQT_QML_DEBUG -g
   LINK_FLAGS = -mwindows

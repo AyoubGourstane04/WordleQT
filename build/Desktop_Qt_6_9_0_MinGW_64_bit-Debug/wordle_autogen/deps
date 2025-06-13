@@ -38,6 +38,8 @@ wordle_autogen/timestamp: \
 	C:/Program\ Files/CMake/share/cmake-4.0/Modules/Platform/Windows.cmake \
 	C:/Program\ Files/CMake/share/cmake-4.0/Modules/Platform/WindowsPaths.cmake \
 	C:/ProgramData/QtCreator/Links/220b434853c64bd082ec8dbd95780879/CMakeLists.txt \
+	C:/ProgramData/QtCreator/Links/220b434853c64bd082ec8dbd95780879/customlineedit.cpp \
+	C:/ProgramData/QtCreator/Links/220b434853c64bd082ec8dbd95780879/customlineedit.h \
 	C:/ProgramData/QtCreator/Links/220b434853c64bd082ec8dbd95780879/database.cpp \
 	C:/ProgramData/QtCreator/Links/220b434853c64bd082ec8dbd95780879/database.h \
 	C:/ProgramData/QtCreator/Links/220b434853c64bd082ec8dbd95780879/login.cpp \

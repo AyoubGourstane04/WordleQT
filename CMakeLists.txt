@@ -26,6 +26,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         login.h login.cpp
         signup.h signup.cpp
         database.h database.cpp
+        customlineedit.h
+        customlineedit.cpp
 
 
 

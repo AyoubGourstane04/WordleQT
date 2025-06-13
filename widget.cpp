@@ -4,8 +4,6 @@
 
 
 
-
-
 Widget::Widget(const QString &username, QWidget *parent)
     : QWidget(parent), currentUsername(username)
 {
@@ -44,8 +42,8 @@ Widget::Widget(const QString &username, QWidget *parent)
     }
 
     if(userLoggedIn) {
-       // QLabel *userIcon = new QLabel();
-       // userIcon->setPixmap(QPixmap(":/res/user-regular.svg").scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        // QLabel *userIcon = new QLabel();
+        // userIcon->setPixmap(QPixmap(":/res/user-regular.svg").scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
         QLabel *userNameLabel = new QLabel();
         userNameLabel->setText(QString("%1 %2").arg(firstName, lastName));
@@ -63,7 +61,7 @@ Widget::Widget(const QString &username, QWidget *parent)
             "font-weight : bold;"
             );
 
-       // userInfoLayout->addWidget(userIcon);
+        // userInfoLayout->addWidget(userIcon);
         userInfoLayout->addWidget(userNameLabel);
         userInfoLayout->addWidget(scoreLabel);
         userInfoLayout->addStretch();
@@ -122,7 +120,15 @@ Widget::Widget(const QString &username, QWidget *parent)
 
     for(int row = 0; row < 6; row++) {
         for(int col = 0; col < 5; col++) {
-            letterBoxes[row][col] = new QLineEdit(this);
+            letterBoxes[row][col] = new CustomLineEdit(this);
+            letterBoxes[row][col]->setGridPosition(row, col);
+
+            connect(letterBoxes[row][col], &CustomLineEdit::arrowKeyPressed, this, [=](int newRow, int newCol) {
+                if (newRow >= 0 && newRow < 6 && newCol >= 0 && newCol < 5) {
+                    letterBoxes[newRow][newCol]->setFocus();
+                }
+            });
+
             letterBoxes[row][col]->setMaxLength(1);
             letterBoxes[row][col]->setAlignment(Qt::AlignCenter);
             letterBoxes[row][col]->setFixedSize(50, 60);
@@ -182,12 +188,12 @@ Widget::Widget(const QString &username, QWidget *parent)
 
     for (int row = 0; row < 6; ++row) {
         for (int col = 0; col < 5; ++col) {
+
             letterBoxes[row][col]->installEventFilter(
                 new EnterKeyFilter([this]() {
                     submitButton->click();
                 }, letterBoxes[row][col])
                 );
-             letterBoxes[row][col]->installEventFilter(new ArrowKeyFilter(letterBoxes, currentIndex, col, letterBoxes[row][col]));
 
             if(row == 0 && col == 0) letterBoxes[row][col]->setFocus();
 
@@ -202,12 +208,16 @@ Widget::Widget(const QString &username, QWidget *parent)
                     letterBoxes[row][col]->setText(text.toUpper());
                 }
             });
+
         }
     }
 
 
     connect(submitButton, &QPushButton::clicked, this, [this,&score](){ checkGuess(targetWord,score,currentUsername); });
 }
+
+
+
 
 Widget::~Widget() {}
 
@@ -302,7 +312,6 @@ QString Widget::GenerateRandomWord()
         return QString();
     }
 
-    // Randomly select one word from the array
     int index = QRandomGenerator::global()->bounded(wordArray.size());
     QString randomWord = wordArray.at(index).toObject().value("word").toString();
 

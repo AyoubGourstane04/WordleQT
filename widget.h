@@ -33,6 +33,7 @@
 #include<QKeyEvent>
 #include<QMap>
 #include<QJsonObject>
+#include "customlineedit.h"
 
 
 const int WORD_LENGTH = 5;
@@ -52,7 +53,7 @@ public:
     void animateTileReveal(QLineEdit*, const QString &, int);
 private:
     //std::array<std::array<QLineEdit*, 5>, 6> letterBoxes;
-      QLineEdit* letterBoxes[6][5];
+      CustomLineEdit* letterBoxes[6][5];
       int currentIndex=0;
       QEventLoop* checkLoop = nullptr;
       bool checkResult = false;
@@ -94,49 +95,6 @@ protected:
 
 private:
     std::function<void()> submitCallback;
-};
-
-
-//key buttons handling :
-
-class ArrowKeyFilter : public QObject {
-    Q_OBJECT
-public:
-    ArrowKeyFilter(QLineEdit* (&letterBoxes)[6][5], int& currentRow, int& currentCol, QObject* parent = nullptr)
-        : QObject(parent), letterBoxes(letterBoxes), currentRow(currentRow), currentCol(currentCol) {}
-
-protected:
-    bool eventFilter(QObject* obj, QEvent* event) override {
-        if (event->type() == QEvent::KeyPress) {
-            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            switch (keyEvent->key()) {
-            case Qt::Key_Left:
-                if (currentCol > 0) currentCol--;
-                break;
-            case Qt::Key_Right:
-                if (currentCol < 4) currentCol++;
-                break;
-            case Qt::Key_Up:
-                if (currentRow > 0) currentRow--;
-                break;
-            case Qt::Key_Down:
-                if (currentRow < 5) currentRow++;
-                break;
-            default:
-                return QObject::eventFilter(obj, event);
-            }
-
-            // Move focus to the new tile
-            letterBoxes[currentRow][currentCol]->setFocus();
-            return true;
-        }
-        return QObject::eventFilter(obj, event);
-    }
-
-private:
-    QLineEdit* (&letterBoxes)[6][5];  // Correct reference type for a 2D array
-    int& currentRow;
-    int& currentCol;
 };
 
 

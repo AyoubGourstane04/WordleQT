@@ -1,5 +1,6 @@
 C:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/wordle_autogen/EWIEGA46WW/moc_widget.cpp: C:/ProgramData/QtCreator/Links/220b434853c64bd082ec8dbd95780879/widget.h \
   C:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/wordle_autogen/moc_predefs.h \
+  C:/ProgramData/QtCreator/Links/220b434853c64bd082ec8dbd95780879/customlineedit.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QDebug \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QEvent \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QEventLoop \

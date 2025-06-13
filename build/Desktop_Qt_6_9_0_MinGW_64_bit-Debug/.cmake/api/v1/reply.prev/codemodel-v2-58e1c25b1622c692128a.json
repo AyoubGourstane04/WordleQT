@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-110a101b6994c0755d9e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "wordle",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "wordle::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-wordle-Debug-92dded19a587f3be1297.json",
+					"name" : "wordle",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "wordle_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-wordle_autogen-Debug-2b28f5456db405210a59.json",
+					"name" : "wordle_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "wordle_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-wordle_autogen_timestamp_deps-Debug-80f400ec863c45c5d13d.json",
+					"name" : "wordle_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629",
+		"source" : "C:/ProgramData/QtCreator/Links/220b434853c64bd082ec8dbd95780879"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 8
+	}
+}
