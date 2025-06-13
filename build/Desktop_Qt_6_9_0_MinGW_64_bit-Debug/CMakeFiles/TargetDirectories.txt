@@ -1,0 +1,9 @@
+C:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/CMakeFiles/wordle.dir
+C:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/CMakeFiles/edit_cache.dir
+C:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/CMakeFiles/rebuild_cache.dir
+C:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/CMakeFiles/list_install_components.dir
+C:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/CMakeFiles/install.dir
+C:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/CMakeFiles/install/local.dir
+C:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/CMakeFiles/install/strip.dir
+C:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/CMakeFiles/wordle_autogen_timestamp_deps.dir
+C:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/CMakeFiles/wordle_autogen.dir
