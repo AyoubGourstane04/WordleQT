@@ -31,6 +31,8 @@
 #include<QObject>
 #include<QEvent>
 #include<QKeyEvent>
+#include<QMap>
+#include<QJsonObject>
 
 
 const int WORD_LENGTH = 5;

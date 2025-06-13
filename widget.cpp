@@ -178,7 +178,7 @@ Widget::Widget(const QString &username, QWidget *parent)
     } while(!Exists(temp));
     targetWord = temp;
 
-    // Connect events
+
     for (int row = 0; row < 6; ++row) {
         for (int col = 0; col < 5; ++col) {
             letterBoxes[row][col]->installEventFilter(
@@ -270,37 +270,41 @@ void Widget::handleReply()
 
 QString Widget::GenerateRandomWord()
 {
-    QString Url="https://random-word-api.herokuapp.com/word?length=5";
+    QString Url = "https://api.datamuse.com/words?sp=?????&max=1000";
     QUrl url(Url);
-
     request.setUrl(url);
 
     manager = new QNetworkAccessManager(this);
-
     reply = manager->get(request);
 
     QEventLoop loop;
-
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
 
-    if(reply->error()!= QNetworkReply::NoError){
-        qDebug()<<"API Request failed:"<<reply->errorString();
-            return QString();
+    if(reply->error() != QNetworkReply::NoError){
+        qDebug() << "API Request failed: " << reply->errorString();
+        return QString();
     }
 
     QByteArray response = reply->readAll();
     QJsonDocument doc = QJsonDocument::fromJson(response);
-    QJsonArray wordArray = doc.array();
 
-    if(wordArray.isEmpty()){
-        qDebug()<<"No word found";
-        return QString();//like nullptr
+    if (!doc.isArray()) {
+        qDebug() << "Unexpected API format.";
+        return QString();
     }
 
-    QString Word = wordArray.first().toString();
+    QJsonArray wordArray = doc.array();
+    if (wordArray.isEmpty()) {
+        qDebug() << "No words received.";
+        return QString();
+    }
 
-    return Word;
+    // Randomly select one word from the array
+    int index = QRandomGenerator::global()->bounded(wordArray.size());
+    QString randomWord = wordArray.at(index).toObject().value("word").toString();
+
+    return randomWord;
 }
 
 
@@ -311,12 +315,12 @@ void Widget::resetGame()
             letterBoxes[row][col]->clear();
             letterBoxes[row][col]->setEnabled(true);
             letterBoxes[row][col]->setStyleSheet(
-                                        "background-color: #1e1e1e;"
-                                        "border: 2px solid #3a3a3a;"
-                                        "color: white;"
-                                        "border-radius: 5px;"
-                                        "selection-background-color: #3a3a3a;"
-                                    );
+                "background-color: #1e1e1e;"
+                "border: 2px solid #3a3a3a;"
+                "color: white;"
+                "border-radius: 5px;"
+                "selection-background-color: #3a3a3a;"
+                );
         }
     }
     currentIndex=0;
@@ -330,6 +334,7 @@ void Widget::resetGame()
 
     targetWord=temp;
 
+    letterBoxes[0][0]->setFocus();
 }
 
 void Widget::animateTileReveal(QLineEdit *tile, const QString &style, int delay)
@@ -380,24 +385,43 @@ void Widget::checkGuess(QString target,int &score, const QString currentUsername
         return;
     }
 
-    for(int col=0;col<5;col++){
-        QChar guessLetter= guess.at(col);
-        QString style;
+    QMap<QChar, int> targetLetterCount;
+    QMap<QChar, int> guessedLetterCount;
 
-        if(guessLetter==target.at(col)){
-            style="background-color : green; color : white;";
-        }else if(target.contains(guessLetter)){
-            style="background-color : yellow; color : black;";
-        }else{
-            style="background-color : grey; color : white;";
-        }
-        style+=" border : 2px solid #565758; border-radius : 3px;";
-        letterBoxes[currentIndex][col]->setEnabled(false);
-        animateTileReveal(letterBoxes[currentIndex][col], style, col * 200);
+    for (QChar c : target) {
+        targetLetterCount[c]++;
     }
 
+    for (int col = 0; col < 5; col++) {
+        QChar guessLetter = guess.at(col);
+        if (guessLetter == target.at(col)) {
+            guessedLetterCount[guessLetter]++;
+            QString style = "background-color: green; color: white; border: 2px solid #565758; border-radius: 3px;";
+            letterBoxes[currentIndex][col]->setEnabled(false);
+            animateTileReveal(letterBoxes[currentIndex][col], style, col * 200);
+        }
+    }
+
+    for (int col = 0; col < 5; col++) {
+        QChar guessLetter = guess.at(col);
+        QString style;
+
+        if (guessLetter != target.at(col)) {
+            if (target.contains(guessLetter) && guessedLetterCount[guessLetter] < targetLetterCount[guessLetter]) {
+                style = "background-color: yellow; color: black; border: 2px solid #565758; border-radius: 3px;";
+                guessedLetterCount[guessLetter]++;
+            } else {
+                style = "background-color: grey; color: white; border: 2px solid #565758; border-radius: 3px;";
+            }
+
+            letterBoxes[currentIndex][col]->setEnabled(false);
+            animateTileReveal(letterBoxes[currentIndex][col], style, col * 200);
+        }
+    }
+
+
+
     if(guess==target){
-       //QMessageBox::information(this,"Congratulations!","You Got the Word!!");
         QString str = "<div style='text-align: center; font-family: Futura, sans-serif;'>"
                       "<h2 style='color: #fff; font-size: 20px;'>Congratulations!</h2>"
                       "<span style='font-size: 35px; color: #4CAF50; font-weight: bold; "
@@ -405,31 +429,28 @@ void Widget::checkGuess(QString target,int &score, const QString currentUsername
                       "<div style='font-size: 16px; color: #ddd; margin-top: 10px;'>"
                       "Well done, keep it up!</div></div>";
 
-        qDebug() << "[DEBUG] Updating score for user:" << currentUsername << "Current score:" << score;
-
-        Database::AlterScore(currentUsername);
-        QVariantMap updatedUser = Database::getUserByUsername(currentUsername);
-        score = updatedUser["score"].toInt();
-
-
-        scoreLabel->setText(QString("Score: %1").arg(score));
-        scoreLabel->setFont(QFont("Futura", 12, QFont::Medium));
-        scoreLabel->setStyleSheet(
-            "color: #4CAF50;"
-            "background-color: rgba(76, 175, 80, 0.1);"
-            "border-radius: 10px;"
-            "padding: 3px 8px;"
-            "font-weight : bold;"
-            );
+        if(currentUsername!=nullptr){
+            Database::AlterScore(currentUsername);
+            QVariantMap updatedUser = Database::getUserByUsername(currentUsername);
+            score = updatedUser["score"].toInt();
 
 
+            scoreLabel->setText(QString("Score: %1").arg(score));
+            scoreLabel->setFont(QFont("Futura", 12, QFont::Medium));
+            scoreLabel->setStyleSheet(
+                "color: #4CAF50;"
+                "background-color: rgba(76, 175, 80, 0.1);"
+                "border-radius: 10px;"
+                "padding: 3px 8px;"
+                "font-weight : bold;"
+                );
+
+        }
 
         QMessageBox::information(this, "Congratulations!", str);
 
         resetGame();
     }else if(++currentIndex>=6){
-        //QString str= "The word was \t <span style='font-size : 25px; color: Green; font-weight: bold;'>" + target.toUpper()+" </span>";
-        //QMessageBox::information(this,"Game Over!",str);
         QString str = "<div style='text-align: center; font-family: Futura, sans-serif;'>"
                       "<h2 style='color: #fff; font-size: 20px;'>The word was</h2>"
                       "<span style='font-size: 35px; color: #4CAF50; font-weight: bold; "

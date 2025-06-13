@@ -8,7 +8,9 @@ C:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/wordle_autogen/E
   C:/Qt/6.9.0/mingw_64/include/QtCore/QIODevice \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QList \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QMap \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QMetaType \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QObject \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QPropertyAnimation \
@@ -95,6 +97,7 @@ C:/ProgramData/QtCreator/Links/4611d08b48a10d7f043bae6da715e629/wordle_autogen/E
   C:/Qt/6.9.0/mingw_64/include/QtCore/qiterator.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonarray.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qlatin1stringview.h \
