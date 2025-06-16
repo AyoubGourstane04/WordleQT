@@ -282,6 +282,7 @@ void Widget::handleReply()
 
 QString Widget::GenerateRandomWord()
 {
+  /*
     QString Url = "https://api.datamuse.com/words?sp=?????&max=1000";
     QUrl url(Url);
     request.setUrl(url);
@@ -315,7 +316,9 @@ QString Widget::GenerateRandomWord()
     int index = QRandomGenerator::global()->bounded(wordArray.size());
     QString randomWord = wordArray.at(index).toObject().value("word").toString();
 
-    return randomWord;
+    return randomWord;*/
+
+    return "fuzzy";
 }
 
 
