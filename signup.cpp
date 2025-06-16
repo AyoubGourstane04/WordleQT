@@ -265,7 +265,7 @@ bool Signup::eventFilter(QObject *obj, QEvent *event)
         QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
         if (keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter) {
             signupBtn->click();
-            return true; // Event handled
+            return true;
         }
     }
     return QWidget::eventFilter(obj, event);

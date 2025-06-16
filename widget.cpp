@@ -42,9 +42,6 @@ Widget::Widget(const QString &username, QWidget *parent)
     }
 
     if(userLoggedIn) {
-        // QLabel *userIcon = new QLabel();
-        // userIcon->setPixmap(QPixmap(":/res/user-regular.svg").scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-
         QLabel *userNameLabel = new QLabel();
         userNameLabel->setText(QString("%1 %2").arg(firstName, lastName));
         userNameLabel->setFont(QFont("Futura", 12, QFont::Medium));
@@ -61,7 +58,6 @@ Widget::Widget(const QString &username, QWidget *parent)
             "font-weight : bold;"
             );
 
-        // userInfoLayout->addWidget(userIcon);
         userInfoLayout->addWidget(userNameLabel);
         userInfoLayout->addWidget(scoreLabel);
         userInfoLayout->addStretch();
@@ -269,7 +265,7 @@ bool Widget::Exists(const QString &word)
 void Widget::handleReply()
 {
     if(reply->error()!=QNetworkReply::NoError){
-        qDebug()<<"Network error : "<<reply->errorString();//prints messages to the console.
+        qDebug()<<"Network error : "<<reply->errorString();
         checkResult=false;
     }else{
         int statusCode =reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
@@ -282,7 +278,6 @@ void Widget::handleReply()
 
 QString Widget::GenerateRandomWord()
 {
-  /*
     QString Url = "https://api.datamuse.com/words?sp=?????&max=1000";
     QUrl url(Url);
     request.setUrl(url);
@@ -316,9 +311,7 @@ QString Widget::GenerateRandomWord()
     int index = QRandomGenerator::global()->bounded(wordArray.size());
     QString randomWord = wordArray.at(index).toObject().value("word").toString();
 
-    return randomWord;*/
-
-    return "fuzzy";
+    return randomWord;
 }
 
 

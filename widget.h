@@ -52,7 +52,6 @@ public:
     QStringList GetWordList(const QString&);
     void animateTileReveal(QLineEdit*, const QString &, int);
 private:
-    //std::array<std::array<QLineEdit*, 5>, 6> letterBoxes;
       CustomLineEdit* letterBoxes[6][5];
       int currentIndex=0;
       QEventLoop* checkLoop = nullptr;

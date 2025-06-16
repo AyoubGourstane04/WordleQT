@@ -11,18 +11,16 @@ Login::Login(QWidget *parent)
 {
     setWindowTitle("Login");
     setWindowIcon(QIcon(":/res/w-solid.svg"));
-    resize(450, 550);  // Slightly larger for better spacing
+    resize(450, 550);
     this->setStyleSheet(
         "background-color: #121212;"
         "color: #ffffff;"
         );
 
-    // Main layout
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     mainLayout->setContentsMargins(50, 50, 50, 50);
     mainLayout->setSpacing(30);
 
-    // Header with back button and title
     QHBoxLayout *headerLayout = new QHBoxLayout();
     headerLayout->setContentsMargins(0, 0, 0, 0);
     headerLayout->setSpacing(20);
@@ -60,7 +58,6 @@ Login::Login(QWidget *parent)
     headerLayout->addStretch();
     mainLayout->addLayout(headerLayout);
 
-    // Subtitle
     QLabel *subtitleLabel = new QLabel("Welcome back! Please enter your details");
     subtitleLabel->setFont(QFont("Futura", 14));
     subtitleLabel->setStyleSheet(
@@ -70,12 +67,10 @@ Login::Login(QWidget *parent)
     subtitleLabel->setAlignment(Qt::AlignCenter);
     mainLayout->addWidget(subtitleLabel);
 
-    // Form layout
     QVBoxLayout *formLayout = new QVBoxLayout();
     formLayout->setSpacing(20);
     formLayout->setContentsMargins(0, 20, 0, 20);
 
-    // Username field
     QLabel *usernameLabel = new QLabel("Username or Email");
     usernameLabel->setFont(QFont("Futura", 12, QFont::Medium));
     usernameLabel->setStyleSheet(
@@ -102,7 +97,6 @@ Login::Login(QWidget *parent)
         );
     UserNameEdit->setFocus();
 
-    // Password field
     QLabel *passwordLabel = new QLabel("Password");
     passwordLabel->setFont(QFont("Futura", 12, QFont::Medium));
     passwordLabel->setStyleSheet(
@@ -129,11 +123,9 @@ Login::Login(QWidget *parent)
         "}"
         );
 
-    // Connect return pressed events
     connect(UserNameEdit, &QLineEdit::returnPressed, this, [this]() { loginBtn->click(); });
     connect(PasswordEdit, &QLineEdit::returnPressed, this, [this]() { loginBtn->click(); });
 
-    // Add fields to form
     formLayout->addWidget(usernameLabel);
     formLayout->addWidget(UserNameEdit);
     formLayout->addSpacing(10);
@@ -142,7 +134,6 @@ Login::Login(QWidget *parent)
 
     mainLayout->addLayout(formLayout);
 
-    // Login button
     loginBtn = new QPushButton("LOGIN");
     loginBtn->setFont(QFont("Futura", 16, QFont::Bold));
     loginBtn->setStyleSheet(
@@ -168,7 +159,6 @@ Login::Login(QWidget *parent)
 
     mainLayout->addWidget(loginBtn);
 
-    // Signup prompt
     QHBoxLayout *signupLayout = new QHBoxLayout();
     signupLayout->setContentsMargins(0, 20, 0, 0);
     signupLayout->setSpacing(5);
@@ -233,7 +223,6 @@ void Login::login()
     QString hashedPassword = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256).toHex();
 
     if(Database::authenticateUser(userName,hashedPassword)){
-        //QMessageBox::information(this,"Login success","Login successful!");
             this->hide();
             Widget *main=new Widget(userName);
             main->show();
